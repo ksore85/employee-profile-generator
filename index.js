@@ -3,7 +3,13 @@ const fs = require('fs')
 const Manager = require("./lib/Manager")
 const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
+const generatePage = require("./src/generatePage")
 
+const employees = [];
+
+let managerObject = {}
+let internObject = {}
+let engineerObject = {}
 
 
 // Manager Questions
@@ -248,5 +254,83 @@ const internQs = [
         }
     },
 ]
+
+function init() {
+    return inquirer
+    .prompt(managerQs)
+    .then(response => {
+        managerObject = response
+        const newManager = new Manager(response.name, response.id,response.email, response.officeNumber);
+        employees.push(newManager);
+
+        if (managerObject.addAnother) {
+            if (managerObject.addTeamMember.includes('Engineer')) {
+                engineerQuestions();
+                return
+            } else {
+                internQuestions();
+                return;
+            }
+        } else {
+            fs.writeFile(`./dist/index.html`, generatePage(employees), (err) => {
+                console.log("An html page in the /dist folder has been generated for"+ managerObject.name +"'s team.")
+                if (err) throw err
+            })
+        }
+    })
+}
+
+function engineerQuestions() {
+    return inquirer
+    .prompt(engineerQs)
+    .then(response => {
+        engineerObject = response;
+        const newEngineer = new Engineer(response.name, response.id,response.email, response.gitHub);
+        employees.push(newEngineer);
+
+        if (engineerObject.addAnother) {
+            if (engineerObject.addTeamMember.includes('Engineer')) {
+                engineerQuestions();
+                return
+            } else {
+                internQuestions();
+                return;
+            }
+        } else {
+            fs.writeFile(`./dist/index.html`, generatePage(employees), (err) => {
+                console.log("An html page in the /dist folder has been generated for"+ managerObject.name +"'s team.")
+                if (err) throw err
+            })
+        }
+    })
+}
+
+function internQuestions() {
+    return inquirer
+    .prompt(internQs)
+    .then(response => {
+        internObject = response;
+        const newIntern = new Intern(response.name, response.id, response.email, response.school);
+        employees.push(newIntern);
+
+        if (internObject.addAnother) {
+            if (internObject.addTeamMember.includes('Engineer')) {
+                engineerQuestions();
+                return
+            } else {
+                internQuestions();
+                return;
+            }
+        } else {
+            fs.writeFile(`./dist/index.html`, generatePage(employees), (err) => {
+                console.log("An html page in the /dist folder has been generated for"+ managerObject.name +"'s team.")
+                if (err) throw err
+            })
+        }
+    })
+}
+
+
+init();
 
 
