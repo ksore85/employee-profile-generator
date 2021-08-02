@@ -1,3 +1,4 @@
+
 const inquirer = require('inquirer')
 const fs = require('fs')
 const Manager = require("./lib/Manager")
@@ -8,11 +9,10 @@ const generatePage = require("./src/generatePage")
 const employees = [];
 
 let managerObject = {}
-let internObject = {}
 let engineerObject = {}
+let internObject = {}
 
-
-// Manager Questions
+//Manager Questions
 const managerQs = [
     {
         type: 'input',
@@ -22,7 +22,7 @@ const managerQs = [
             if (nameInput) {
                 return true;
             } else {
-                console.log("You must enter the name.");
+                console.log("You must enter the name!");
                 return false;
             }
         }
@@ -30,12 +30,12 @@ const managerQs = [
     {
         type: 'input',
         name: 'id',
-        message: "Please provide the manager's employee ID.",
+        message: "Please provide the manager's employee ID number.",
         validate: idInput => {
             if (idInput) {
                 return true;
             } else {
-                console.log("You must enter the employee ID.");
+                console.log("You must enter the employee ID!");
                 return false;
             }
         }
@@ -48,7 +48,7 @@ const managerQs = [
             if (emailInput) {
                 return true;
             } else {
-                console.log("You must enter the email address.");
+                console.log("You must enter the email address!");
                 return false;
             }
         }
@@ -56,12 +56,12 @@ const managerQs = [
     {
         type: 'input',
         name: 'officeNumber',
-        message: "Please provide the manager's office number?",
+        message: "Please provide the manager's office number.",
         validate: officeNumber => {
             if (officeNumber) {
                 return true;
             } else {
-                console.log("You must enter the office number.")
+                console.log("You must enter the office number!")
                 return false;
             }
         }
@@ -103,7 +103,7 @@ const engineerQs = [
             if (nameInput) {
                 return true;
             } else {
-                console.log("You must enter the name.");
+                console.log("You must enter the name!");
                 return false;
             }
         }
@@ -116,7 +116,7 @@ const engineerQs = [
             if (idInput) {
                 return true;
             } else {
-                console.log("You must enter the employee ID.");
+                console.log("You must enter the employee ID!");
                 return false;
             }
         }
@@ -129,7 +129,7 @@ const engineerQs = [
             if (emailInput) {
                 return true;
             } else {
-                console.log("You must enter the email address.");
+                console.log("You must enter the email address!");
                 return false;
             }
         }
@@ -142,7 +142,7 @@ const engineerQs = [
             if (gitHub) {
                 return true;
             } else {
-                console.log("You must enter the GitHub username.")
+                console.log("You must enter the GitHub username!")
                 return false;
             }
         }
@@ -184,7 +184,7 @@ const internQs = [
             if (nameInput) {
                 return true;
             } else {
-                console.log("You must enter the name.");
+                console.log("You must enter the name!");
                 return false;
             }
         }
@@ -197,7 +197,7 @@ const internQs = [
             if (idInput) {
                 return true;
             } else {
-                console.log("You must enter the employee ID.");
+                console.log("You must enter the employee ID!");
                 return false;
             }
         }
@@ -210,7 +210,7 @@ const internQs = [
             if (emailInput) {
                 return true;
             } else {
-                console.log("You must enter the email address.");
+                console.log("You must enter the email address!");
                 return false;
             }
         }
@@ -223,7 +223,7 @@ const internQs = [
             if (school) {
                 return true;
             } else {
-                console.log("You must enter the school.")
+                console.log("You must enter the school!")
                 return false;
             }
         }
@@ -260,10 +260,10 @@ function init() {
     .prompt(managerQs)
     .then(response => {
         managerObject = response
-        const newManager = new Manager(response.name, response.id,response.email, response.officeNumber);
+        const newManager = new Manager(response.name, response.id, response.email, response.officeNumber);
         employees.push(newManager);
 
-        if (managerObject.addAnother) {
+        if (managerObject.addMember) {
             if (managerObject.addTeamMember.includes('Engineer')) {
                 engineerQuestions();
                 return
@@ -280,15 +280,16 @@ function init() {
     })
 }
 
+
 function engineerQuestions() {
     return inquirer
     .prompt(engineerQs)
     .then(response => {
         engineerObject = response;
-        const newEngineer = new Engineer(response.name, response.id,response.email, response.gitHub);
+        const newEngineer = new Engineer(response.name, response.id, response.email, response.gitHub);
         employees.push(newEngineer);
 
-        if (engineerObject.addAnother) {
+        if (engineerObject.addMember) {
             if (engineerObject.addTeamMember.includes('Engineer')) {
                 engineerQuestions();
                 return
@@ -313,7 +314,7 @@ function internQuestions() {
         const newIntern = new Intern(response.name, response.id, response.email, response.school);
         employees.push(newIntern);
 
-        if (internObject.addAnother) {
+        if (internObject.addMember) {
             if (internObject.addTeamMember.includes('Engineer')) {
                 engineerQuestions();
                 return
