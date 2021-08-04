@@ -136,7 +136,7 @@ const engineerQs = [
     },
     {
         type: 'input',
-        name: 'gitHub',
+        name: 'github',
         message: "Please provide the engineer's GitHub username.",
         validate: gitHub => {
             if (gitHub) {
@@ -286,8 +286,10 @@ function engineerQuestions() {
     .prompt(engineerQs)
     .then(response => {
         engineerObject = response;
-        const newEngineer = new Engineer(response.name, response.id, response.email, response.gitHub);
+        console.log(engineerObject);
+        const newEngineer = new Engineer(response.name, response.id, response.email, response.github);
         employees.push(newEngineer);
+        console.log(newEngineer)
 
         if (engineerObject.addMember) {
             if (engineerObject.addTeamMember.includes('Engineer')) {
