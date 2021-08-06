@@ -138,8 +138,8 @@ const engineerQs = [
         type: 'input',
         name: 'github',
         message: "Please provide the engineer's GitHub username.",
-        validate: gitHub => {
-            if (gitHub) {
+        validate: github => {
+            if (github) {
                 return true;
             } else {
                 console.log("You must enter the GitHub username!")
@@ -151,8 +151,8 @@ const engineerQs = [
         type: 'confirm',
         name: 'addMember',
         message: "Would you like to add a team member?",
-        when: ({gitHub}) => {
-            if (gitHub) {
+        when: ({github}) => {
+            if (github) {
                 return true;
             } else {
                 return false;
@@ -286,11 +286,9 @@ function engineerQuestions() {
     .prompt(engineerQs)
     .then(response => {
         engineerObject = response;
-        console.log(engineerObject);
         const newEngineer = new Engineer(response.name, response.id, response.email, response.github);
         employees.push(newEngineer);
-        console.log(newEngineer)
-
+        
         if (engineerObject.addMember) {
             if (engineerObject.addTeamMember.includes('Engineer')) {
                 engineerQuestions();
@@ -332,6 +330,7 @@ function internQuestions() {
         }
     })
 }
+
 
 
 init();
