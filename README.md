@@ -34,4 +34,4 @@ You can also view a step by step video of the application's usage at: (https://d
  To run "Tests" type; "npm run test" in the Command Line.
 
 ## Credits
-- [Kyle Sorensen](https://www.github.com/ksore85-exe/)
+- [Kyle Sorensen](https://www.github.com/ksore85/)
