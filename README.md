@@ -15,7 +15,9 @@ A command line application that generates employee data based on user input and 
 This application can be installed by cloning the project from GitHub.
 
 ## Usage
-In the Command Line, enter "node index". Enter team member data as prompted. Once you opt to not add another team member, an index.html file will be created in the application's "/dist" folder that will show a page populated with the reponses, as entered.
+In the Command Line, enter "node index". Enter team member data as prompted. Once you opt to not add another team member, an index.html file will be created in the application's "/dist" folder that will show a page populated with the reponses, as entered. 
+
+You can also view a step by step video of the application's usage at: (https://drive.google.com/file/d/1rZhqibjn0MNv8fgYJ8SpwqAxxaoPsGW1/view)
 
 ## Languages
  - HTML
